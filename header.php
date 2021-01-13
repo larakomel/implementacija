@@ -2,7 +2,7 @@
 
 <html lang="sl-SI">
   <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="sustyle.css">
     <meta charset="utf-8" name="viewport" content="width=device-width, user-scaleable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Home</title>
 
@@ -16,7 +16,7 @@
 
     <!--meni-->
     <nav class="navbar navbar-dark navbar-fixed-top" style="background-color: #2E4677;">
-      <a class="navbar-brand" href="home.html">
+      <a class="navbar-brand" href="home.php">
     <img src="logo.png" alt="logo" style="width:70px;">
     </a>
   <button id="tog" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -25,22 +25,14 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" style="color: white; font-size: 20px;" href="login.html">Log In</a>
+        <a class="nav-link" style="color: white; font-size: 20px;" href="login.php">Log In</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="signup.html">Sign up</a>
+        <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="signup.php">Sign up</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="profile.html">My profile</a>
+        <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="profile.php">My profile</a>
       </li>
     </ul>
   </div>
 </nav>
-<br>
-   
-   
-
-    
-    </div>
-  </body>
-</html>
