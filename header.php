@@ -34,7 +34,7 @@ session_start();
               <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="profile.php">My profile</a>
             </li>';
             echo '<li class="nav-item">
-              <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="profile.php">Log out</a>
+              <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="includes/logout.inc.php">Log out</a>
             </li>';
           }else{
               echo '<li class="nav-item">
