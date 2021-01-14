@@ -77,7 +77,26 @@ function emptyInputLogin($email, $pwd){
 
 function loginUser($connection, $email, $pwd){
    $emailTaken = takenEmail($connection, $email);
+    
+   if($emailTaken === false){
+    header("location: ../login.php?error=wronglogin");
+    exit();
+   }
 
+   $pwdHashed = $emailTaken["geslo"];
+   $checkPwd = password_verify($pwd, $pwdHashed);
+
+   if ($checkPwd === false){
+    header("location: ../login.php?error=wronglogin");
+    exit();
+   }
+   else if ($checkPwd === true){
+     session_start();
+     $_SESSION["userid"] = $emailTaken["id"];
+     $_SESSION["email"] = $emailTaken["elektronska_posta"];
+     header("location: ../home.php");
+     exit();
+  }
 }
 
  

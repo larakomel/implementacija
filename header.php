@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 
 <html lang="sl-SI">
@@ -24,15 +28,25 @@
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" style="color: white; font-size: 20px;" href="login.php">Log In</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="signup.php">Sign up</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="profile.php">My profile</a>
-      </li>
+        <?php
+          if(isset($_SESSION["email"])){
+              echo '<li class="nav-item">
+              <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="profile.php">My profile</a>
+            </li>';
+            echo '<li class="nav-item">
+              <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="profile.php">Log out</a>
+            </li>';
+          }else{
+              echo '<li class="nav-item">
+              <a class="nav-link" style="color: white; font-size: 20px;" href="login.php">Log In</a>
+            </li>';
+            echo '<li class="nav-item">
+            <a class="nav-link" id="navodila" style="color: white; font-size: 20px;" href="signup.php">Sign up</a>
+          </li>';
+          }
+        ?>
+      
+      
     </ul>
   </div>
 </nav>

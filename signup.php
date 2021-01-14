@@ -55,25 +55,6 @@
   </div>
   </div>
   </div>
-   <?php
-
-     if(isset($_GET["error"])){
-       if($_GET["error"]=="emptyimput"){
-         echo "<p>Fill in all fields!</p>";
-       } 
-       else if ($_GET["error"] == "invalidEmail"){
-        echo "<p>Email invalid</p>";
-     }else if($_GET["error"]=="takenEmail"){
-      echo "<p>Email already taken</p>";
-      }else if($_GET["error"]=="stmtFailed"){
-        echo "<p>Something went wrong</p>";
-      }else if($_GET["error"]=="none"){
-        echo "<p>Sign up sucessful!</p>";
-        }
-    }
-   ?>
-   
-
     
     </div>
   </body>
