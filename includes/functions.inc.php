@@ -67,7 +67,7 @@ function invalidEmail($email){
 
 function emptyInputLogin($email, $pwd){
     $result;
-   if(empty($email) || empty($pwd))){
+   if(empty($email) || empty($pwd)){
       $result=true;
    }else{
        $result = false;
@@ -77,7 +77,7 @@ function emptyInputLogin($email, $pwd){
 
 function loginUser($connection, $email, $pwd){
    $emailTaken = takenEmail($connection, $email);
-   
+
 }
 
  

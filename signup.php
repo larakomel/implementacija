@@ -9,6 +9,23 @@
   <div id="kvadrat">
     <div id="okvir">
   <h3 id="naslov">Sign Up</h3>
+  <?php
+
+     if(isset($_GET["error"])){
+       if($_GET["error"]=="emptyimput"){
+         echo "<p>Fill in all fields!</p>";
+       } 
+       else if ($_GET["error"] == "invalidEmail"){
+        echo "<p style='color: yellow; font-size: 20px; text-align: center;'>Email invalid</p>";
+     }else if($_GET["error"]=="takenEmail"){
+      echo "<p style='color: yellow; font-size: 20px; text-align: center;'>Email already taken</p>";
+      }else if($_GET["error"]=="stmtFailed"){
+        echo "<p style='color: yellow; font-size: 20px; text-align: center;'>Something went wrong</p>";
+      }else if($_GET["error"]=="none"){
+        echo "<p style='color: yellow; font-size: 20px; text-align: center;'>Sign up sucessful!</p>";
+        }
+    }
+   ?>
   <a class="nav-link" style="color: white; font-size: 20px; text-align: center;" href="login.html">Log In</a>
   
 
@@ -31,13 +48,30 @@
         <label for="pnum">Telefonska številka:</label><br>
         <input type="tel" id="pnum" name="pnum"><br>
         <div id="submitreset">
-        <input type="Submit" name="submit" value="Sign Up">
+        <input type="submit" name="submit" value="Sign Up">
         <input type="reset"></div>
         </form>
   </div>
   </div>
   </div>
   </div>
+   <?php
+
+     if(isset($_GET["error"])){
+       if($_GET["error"]=="emptyimput"){
+         echo "<p>Fill in all fields!</p>";
+       } 
+       else if ($_GET["error"] == "invalidEmail"){
+        echo "<p>Email invalid</p>";
+     }else if($_GET["error"]=="takenEmail"){
+      echo "<p>Email already taken</p>";
+      }else if($_GET["error"]=="stmtFailed"){
+        echo "<p>Something went wrong</p>";
+      }else if($_GET["error"]=="none"){
+        echo "<p>Sign up sucessful!</p>";
+        }
+    }
+   ?>
    
 
     

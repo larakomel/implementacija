@@ -18,7 +18,7 @@
         <label for="pwd">Geslo:</label><br>
         <input type="password" id="pwd" name="pwd"><br>
         <div id="submitreset">
-        <input type="Submit" value="Log in">
+        <input type="submit" value="Log in">
         </div>
         </form>
   </div>

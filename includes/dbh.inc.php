@@ -1,10 +1,9 @@
 <?php
 
 $serverName = "localhost";
-$dBUsername = "codeigniter2019";
+$dBUsername = "codeigniter";
 $dBPassword = "codeigniter2019";
 $dBName = "SISIII_89191056";
-
 
 $connection = mysqli_connect($serverName, $dBUsername, $dBPassword, $dBName);
 
