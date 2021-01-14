@@ -30,7 +30,7 @@ if(isset($_POST["submit"])){
         exit();
     }
     
-    createUser($connection, $name, $lastname, $adress, $city, $posta, $email, $pwd, $pnum);
+    createUser($connection, $name, $lastname, $pnum, $adress, $city, $posta, $email, $pwd);
 
 
 }
