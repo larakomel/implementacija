@@ -20,7 +20,11 @@ body{
     justify-content: center;
   
   }
-  
+  .myDiv {
+    border: 5px outset red;
+    background-color: lightblue;    
+    text-align: center;
+  }
   #tog:hover{
     background-color: #2E4677;
   
@@ -31,7 +35,16 @@ body{
   
   }
   
- 
+  #profil{ 
+    border-radius: 5%;
+  
+    padding-top: 20px;
+    padding: 50px;
+    border: 10px double white;
+    margin: 100px;
+    text-align: center;
+    background-color:#2E4677;
+  }
   #kvadrat{
     border-radius: 5%;
   
@@ -42,6 +55,7 @@ body{
     text-align: center;
     background-color:#2E4677;
   }
+  
   
   /*start*/
   #naslov{

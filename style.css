@@ -1,0 +1,43 @@
+.profil{ 
+    
+    padding: 10px;
+    width: 70%;
+    margin: 10px;
+    text-align: center;
+    background-color:white;
+    color:  #000000;
+    justify-content: center;
+    border: 5px #2E4677;
+    border-style: none none solid none;
+
+  }
+
+  .crta{
+    padding: 10px;
+      height: 3px;
+      width: 70%;
+      background-color:#0b101a;
+  }
+  .profilna{
+    margin: 30px;
+  }
+
+  .izbira{
+      text-align: center;
+   
+    
+    justify-content: center;
+  }
+  .narocila{
+    text-align: center;
+    justify-content: center;
+
+  }
+  .narocilo{
+    text-align: center;
+    justify-content: center;
+    border: 3px solid #2E4677;
+    width: 50%;
+    padding: 10px;
+    margin: 10px;
+  }
