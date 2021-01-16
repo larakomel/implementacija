@@ -26,7 +26,7 @@
         }
     }
    ?>
-  <a class="nav-link" style="color: white; font-size: 20px; text-align: center;" href="login.html">Log In</a>
+  <a class="nav-link" style="color: white; font-size: 20px; text-align: center;" href="login.php">Log In</a>
   
 
   <div class="mreza">
