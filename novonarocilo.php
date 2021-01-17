@@ -9,13 +9,16 @@
   <?php
 
      if(isset($_GET["error"])){
-       if($_GET["error"]=="emptyimput"){
-         echo "<p>Fill in all fields!</p>";
+       if($_GET["error"]=="emptyinput"){
+         echo "<p style='color: yellow; font-size: 20px; text-align: center;'>Fill in all fields!</p>";
        } 
        else if($_GET["error"]=="stmtFailed"){
         echo "<p style='color: yellow; font-size: 20px; text-align: center;'>Something went wrong</p>";
       }else if($_GET["error"]=="none"){
-        echo "<p style='color: yellow; font-size: 20px; text-align: center;'>Sign up sucessful!</p>";
+        
+        //echo "<p> User id: ". $_SESSION["userid"]." ,email: ".$_SESSION["email"]."</p>";
+       
+        echo "<p style='color: yellow; font-size: 20px; text-align: center;'>Order sucessful!</p>";
         }
     }
    ?>

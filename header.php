@@ -7,6 +7,7 @@ session_start();
 <html lang="sl-SI">
   <head>
     <link rel="stylesheet" type="text/css" href="sustyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" name="viewport" content="width=device-width, user-scaleable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Home</title>
 

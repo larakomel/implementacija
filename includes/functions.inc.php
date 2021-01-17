@@ -75,6 +75,24 @@ function emptyInputLogin($email, $pwd){
    return $result;
 }
 
+
+function userid($connection, $email){
+   $sql = "select id from Uporabnik where elektronska_posta='$email';";
+   $result = mysqli_query($connection, $sql);
+
+   if(mysqli_num_rows($result) > 0 ){
+   $row = mysqli_fetch_assoc($result);
+   $idu = $row["id"];
+   $_SESSION["userid"] = $idu;
+   //return $result;
+   }else{
+      header("location: ../novonarocilo.php?error=sejnevem");
+   }
+
+
+}
+
+
 function loginUser($connection, $email, $pwd){
    $emailTaken = takenEmail($connection, $email);
     
@@ -92,11 +110,74 @@ function loginUser($connection, $email, $pwd){
    }
    else if ($checkPwd === true){
      session_start();
-     $_SESSION["userid"] = $emailTaken["id"];
-     $_SESSION["email"] = $emailTaken["elektronska_posta"];
+     $sql = "select * from Uporabnik where elektronska_posta='$email';";
+     $result = mysqli_query($connection, $sql);
+     $row = mysqli_fetch_assoc($result);
+     $idu = $row["id"];
+     $_SESSION["userid"] = $idu;
+     $uname = $row["ime"];
+     $ulastname = $row["priimek"];
+     $_SESSION["ime"] = $uname;
+     $_SESSION["priimek"] = $ulastname;
+     //$_SESSION["userid"] = userid($connection, $email);
+     //userid($connection, $email);
+     //$_SESSION["email"] = $emailTaken["elektronska_posta"];
+     $_SESSION["email"] = $email;
      header("location: ../home.php");
      exit();
   }
 }
 
+function orderIncomplete($trgovina, $izdelki, $trgposta, $trgcity){
+   $result;
+   if(empty($trgovina) || empty($izdelki) || empty($trgposta) || empty($trgcity)){
+      $result=true;
+   }else{
+       $result = false;
+   }
+   return $result;
+}
+//sprejme mesto in ga ali ustvari v tabeli lokacija ali pa ga poisce, v obeh primerih vrne id lokacije
+function idLokacije($connection, $trgposta, $trgcity){
+   $sql = "select * from Lokacija WHERE mesto = '$trgcity' AND postna_st='$trgposta';";
+   $result = mysqli_query($connection, $sql);
+
+        if($result && mysqli_num_rows($result)>0){
+            $l_idsql = "select id from Lokacija where mesto = '$trgcity' AND postna_st='$trgposta';";
+            $l_id = mysqli_query($connection, $l_idsql);
+            return $l_id;
+        }else{
+           $sql2 = "insert into Lokacija (mesto, postna_st) values ('$trgcity', '$trgposta');";
+           $l_id2 = mysqli_query($connection, $sql2);
+           if ($l_id2) {
+            //echo "New location created successfully";
+            return $l_id2;
+           } else {
+             echo "Error: " . $sql2 . "" . mysqli_error($connection);
+             }
+        }
+}
+
+
+
+
+function createOrder($connection, $trgovina, $izdelki, $trgposta, $trgcity){
+   $l_id = idLokacije($connection, $trgposta, $trgcity); //naj returna location id
+   $u_id = $_SESSION["userid"];
+   
+   $sql = "insert into Narocilo (seznam_produktov, trgovina, u_id, l_id) values (?,?,?,?);";
+   $stmt = mysqli_stmt_init($connection);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+       header("location: ../novonarocilo.php?error=stmtfailed");
+       exit();
+    }
+    
+    mysqli_stmt_bind_param($stmt, "ssii", $izdelki, $trgovina, $u_id, $l_id );
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+    echo "Naročilo uspešno oddano";
+    header("location: ../novonarocilo.php?error=none");
+   exit();
+}
  
