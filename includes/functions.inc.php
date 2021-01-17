@@ -110,13 +110,17 @@ function loginUser($connection, $email, $pwd){
    }
    else if ($checkPwd === true){
      session_start();
-     $sql = "select * from Uporabnik where elektronska_posta='$email';";
+     $sql = "select id from Uporabnik where elektronska_posta='$email';";
      $result = mysqli_query($connection, $sql);
      $row = mysqli_fetch_assoc($result);
      $idu = $row["id"];
      $_SESSION["userid"] = $idu;
-     $uname = $row["ime"];
-     $ulastname = $row["priimek"];
+
+     $sql2 = "select ime,priimek from Uporabnik where elektronska_posta='$email';";
+     $result2 = mysqli_query($connection, $sql2);
+     $row2 = mysqli_fetch_assoc($result2);
+     $uname = $row2["ime"];
+     $ulastname = $row2["priimek"];
      $_SESSION["ime"] = $uname;
      $_SESSION["priimek"] = $ulastname;
      //$_SESSION["userid"] = userid($connection, $email);
@@ -162,22 +166,26 @@ function idLokacije($connection, $trgposta, $trgcity){
 
 
 function createOrder($connection, $trgovina, $izdelki, $trgposta, $trgcity){
+   session_start();
+   $userid = $_SESSION["userid"];
    $l_id = idLokacije($connection, $trgposta, $trgcity); //naj returna location id
-   $u_id = $_SESSION["userid"];
+   //$u_id = $_SESSION["userid"];
    
-   $sql = "insert into Narocilo (seznam_produktov, trgovina, u_id, l_id) values (?,?,?,?);";
-   $stmt = mysqli_stmt_init($connection);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
-       header("location: ../novonarocilo.php?error=stmtfailed");
-       exit();
-    }
-    
-    mysqli_stmt_bind_param($stmt, "ssii", $izdelki, $trgovina, $u_id, $l_id );
-    mysqli_stmt_execute($stmt);
 
-    mysqli_stmt_close($stmt);
-    echo "Naročilo uspešno oddano";
-    header("location: ../novonarocilo.php?error=none");
-   exit();
+             $sql = "insert into Narocilo (seznam_produktov, trgovina, u_id, l_id) values (?,?,?,?);";
+             $stmt = mysqli_stmt_init($connection);
+              if(!mysqli_stmt_prepare($stmt, $sql)){
+                 header("location: ../novonarocilo.php?error=stmtfailed");
+                 exit();
+              }
+              
+              mysqli_stmt_bind_param($stmt, "ssii", $izdelki, $trgovina, $_SESSION['userid'], $l_id );
+              mysqli_stmt_execute($stmt);
+          
+              mysqli_stmt_close($stmt);
+              echo "Naročilo uspešno oddano";
+              header("location: ../novonarocilo.php?error=none");
+             exit();
+   
 }
  

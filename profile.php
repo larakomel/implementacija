@@ -22,18 +22,47 @@
 <div class="narocila">
   <h5>Moja oddana naročila</h5>
 </div>
-<div class="stran">
-<div class="narocilo">
-<h6> Naročilo: 65436756734</h6>
-   <h6> Naročilo še ni bilo sprejeto </h6>
-   <ul>
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Milk</li>
-</ul>
-  </div>
-</div>
+<?php
+//echo "<div class='stran'>";
+//echo '<div class="narocilo">';
+  
+   require_once 'includes/dbh.inc.php';
+   //ideja: dva for loopa, en sprinta vsako narocilo z id-jem uporabnika,
+   //drugi znotraj, sprinta vsak element $izd = explode(",", $izdelki); kot element v <li>
+   $uid = $_SESSION["userid"];
+   $sql = "select * from Narocilo where u_id='$uid';";
+   $result = mysqli_query($connection, $sql);
+   //echo "<h6> my id: ".$uid."</h6>";
    
+   while ($row = mysqli_fetch_array($result)){
+    //foreach($row as $value){ 
+    echo "<div class='stran'>";
+    echo '<div class="narocilo">';
+     echo "<h5> Naročilo: ".$row['id']."</h5>";
+         $izd = explode(",", $row['seznam_produktov']);
+         echo "<ul style='text-align:left;'>";
+         foreach ($izd as $izdelek){
+           echo "<li>".$izdelek."</li>";
+         }
+     
+     
+         echo "</ul>";
+     echo "</div>";
+     echo "</div>";
+   //}
+  }
+
+   //<h6> Naročilo: 65436756734</h6>
+   //<h6> Naročilo še ni bilo sprejeto </h6>
+   //<ul>
+  //<li>Coffee</li>
+  //<li>Tea</li>
+  //<li>Milk</li>
+//</ul>
+
+//echo "</div>";
+//echo "</div>";
+   ?>
 
   </body>
 </html>
