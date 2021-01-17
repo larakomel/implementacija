@@ -5,7 +5,7 @@
 <div class="stran">
   <div class = "profil">
     <div class="profilna">
-      <img src="logo.png" alt="logo" style="width:70px;">
+      <img src="profilna.png" alt="logo" style="width:150px; border-radius: 50%;">
     </div>
     <?php
     echo "<h3>".$_SESSION["ime"]." ".$_SESSION["priimek"]."</h3>";
@@ -38,7 +38,7 @@
     //foreach($row as $value){ 
     echo "<div class='stran'>";
     echo '<div class="narocilo">';
-     echo "<h5> Naročilo: ".$row['id']."</h5>";
+     echo "<h5> Naročilo ID: ".$row['id']."</h5>";
          $izd = explode(",", $row['seznam_produktov']);
          echo "<ul style='text-align:left;'>";
          foreach ($izd as $izdelek){

@@ -9,18 +9,66 @@
  ?>
 
 <br>
+
 <div class="stran">
-<a class="nav-link" style="color: black; font-size: 20px; text-align: center;" href="novonarocilo.php">Oddaj novo naročilo</a>
+<a class="nav-link" style="color: black; font-size: 20px; text-align: center; background-color: rgb(152, 196, 216); margin:30px;" href="novonarocilo.php">Oddaj novo naročilo</a>
+<br>
 </div>
+
 <div class="stran">
-<div class="narocilo">
-<h6> Naročilo: 65436756734</h6>
-   <h6> Trgovina </h6>
-   <h6> Kraj </h6>
-   <h6> Število artiklov </h6>
+<h3>Naročila:</h3>
+<br>
+</div>
+
+<?php
+   require_once 'includes/dbh.inc.php';
+
+   $uid = $_SESSION["userid"];
+   $sql = "select * from Narocilo;";
+   $result = mysqli_query($connection, $sql);
+   //echo "<h6> my id: ".$uid."</h6>";
    
-  </div>
-</div>
-    </div>
+   while ($row = mysqli_fetch_array($result)){
+     //za lokacijo trgovine
+     $lok_id = $row["l_id"];
+     $sqlKrajTrg = "select * from Lokacija where id='$lok_id';"; 
+     $resultLok = mysqli_query($connection, $sqlKrajTrg);
+     $rowLok = mysqli_fetch_array($resultLok);
+     
+     //za lokacijo uporabnika
+     $sqlUpor = "select kraj, postna_st from Uporabnik where id= '$uid';";
+     $resultUpor = mysqli_query($connection, $sqlUpor);
+     $rowUpor = mysqli_fetch_array($resultUpor);
+    echo "<div class='stran'>";
+    echo '<div class="narocilo">';
+    echo "<h5> Naročilo ID: ".$row['id']."</h5>";
+    echo "<h6> Trgovina: ".$row['trgovina']."</h6>";
+    echo "<h6> Iz kraja: ".$rowLok['mesto']." , ".$rowLok['postna_st']."</h6>";
+    echo "<h6> Dostava v kraj: ".$rowUpor['kraj']." , ".$rowUpor['postna_st']."</h6>";
+         $izd = explode(",", $row['seznam_produktov']);
+         echo "<h5 style='text-align:left;'>Seznam izdelkov: </h5>";
+         echo "<ul style='text-align:left;'>";
+         foreach ($izd as $izdelek){
+           echo "<li>".$izdelek."</li>";
+         }
+     
+     
+         echo "</ul>";
+         
+     echo "</div>";
+     echo "</div>";
+        }
+
+//<div class="stran">
+//<div class="narocilo">
+//<h6> Naročilo: 65436756734</h6>
+   //<h6> Trgovina </h6>
+   //<h6> Kraj </h6>
+   //<h6> Število artiklov </h6>
+   
+  //</div>
+//</div>
+?>
+    
   </body>
 </html>
