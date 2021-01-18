@@ -218,3 +218,48 @@ function prekliciNarocilo($connection, $idnarocila, $userid){
        echo "Error: " . $sql . "" . mysqli_error($connection);
        }
 }
+
+
+function changeEmail($connection, $email, $userid){
+   $userid = $_SESSION["userid"];
+   $sql = "update Uporabnik set elektronska_posta = '$email' where id = '$userid';";
+   $l_id = mysqli_query($connection, $sql);
+   if ($l_id) {
+      header("location: ../profile.php");
+      
+     } else {
+       echo "Error: " . $sql . "" . mysqli_error($connection);
+       }
+}
+
+
+function changeNaslov($connection,$adress,$city,$posta, $userid){
+   $userid = $_SESSION["userid"];
+   $sql = "update Uporabnik set naslov = '$adress' where id = '$userid';";
+   $l_id = mysqli_query($connection, $sql);
+
+   $sql2 = "update Uporabnik set kraj = '$city' where id = '$userid';";
+   $l_id2 = mysqli_query($connection, $sql2);
+
+   $sql3 = "update Uporabnik set postna_st = '$posta' where id = '$userid';";
+   $l_id3 = mysqli_query($connection, $sql3);
+
+   if ($l_id) {
+      header("location: ../profile.php");
+      
+     } else {
+       echo "Error: " . $sql . "" . mysqli_error($connection);
+       }
+}
+
+function changeTel($connection, $pnum, $userid){
+   $userid = $_SESSION["userid"];
+   $sql = "update Uporabnik set telefonska_stevilka = '$pnum' where id = '$userid';";
+   $l_id = mysqli_query($connection, $sql);
+   if ($l_id) {
+      header("location: ../profile.php");
+      
+     } else {
+       echo "Error: " . $sql . "" . mysqli_error($connection);
+       }
+}

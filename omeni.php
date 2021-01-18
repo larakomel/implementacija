@@ -16,41 +16,46 @@
     echo "</div>";
 
     echo "<div class='stran'>";
-    echo '<div class="narocilo">';
+    //echo '<div class="narocilo">';
     echo "<h5> Ime: ".$row['ime']."</h5>";
-    echo "</div>";
+    //echo "</div>";
     echo "</div>";
 
     echo "<div class='stran'>";
-    echo '<div class="narocilo">';
+    //echo '<div class="narocilo">';
     echo "<h5> Priimek: ".$row['priimek']."</h5>";
-    echo "</div>";
+    //echo "</div>";
     echo "</div>";
 
     echo "<div class='stran'>";
-    echo '<div class="narocilo">';
+    //echo '<div class="narocilo">';
     echo "<h5> Telefonska številka: ".$row['telefonska_stevilka']."</h5>";
-    echo "</div>";
+    //echo "</div>";
     echo "</div>";
 
     echo "<div class='stran'>";
-    echo '<div class="narocilo">';
+    //echo '<div class="narocilo">';
     echo "<h5> Naslov: ".$row['naslov']."</h5>";
-    echo "</div>";
+    //echo "</div>";
     echo "</div>";
 
     echo "<div class='stran'>";
-    echo '<div class="narocilo">';
+    //echo '<div class="narocilo">';
     echo "<h5> Kraj: ".$row['kraj']."</h5>";
-    echo "</div>";
+    //echo "</div>";
     echo "</div>";
 
     echo "<div class='stran'>";
-    echo '<div class="narocilo">';
+    //echo '<div class="narocilo">';
     echo "<h5> Elektronska pošta: ".$row['elektronska_posta']."</h5>";
-    echo "</div>";
-    echo "</div>";
     
+    //echo "</div>";
+    echo "</div>";
+    echo '<div class="izbira">';
+    echo "<a href='edit.php?naslov=<? php echo x ?>'>  Spremeni naslov  </a><br>";
+    echo "<a href='edit.php?email=<? php echo x ?>'>  Spremeni email  </a><br>";
+    echo "<a href='edit.php?tel=<? php echo x ?>'>  Sprejmi telefonsko številko  </a>";
+    echo '</div>';
     ?>
 
 </body>

@@ -82,7 +82,12 @@ while ($row = mysqli_fetch_array($result)){
       if($row['dost_id']==0){
         echo "<form method = 'get' action='includes/preklic.inc.php'>";
          //echo "<input type='hidden' name='$idd' value='$idd2'>";
-         echo "<label for='neki'>Prekliči to naročilo: </label><br>";
+         echo "<label for='neki'>Prekliči to naročilo: </label>";
+         echo "<input type ='submit' name='preklic' value = '$idd'>";
+       }else{
+        echo "<form method = 'get' action='includes/preklic.inc.php'>";
+         //echo "<input type='hidden' name='$idd' value='$idd2'>";
+         echo "<label for='neki'>Potrdi prejeto naročilo: </label>";
          echo "<input type ='submit' name='preklic' value = '$idd'>";
        }
       //echo "</form";
