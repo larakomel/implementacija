@@ -32,37 +32,62 @@
 </div>
 
 <div class="narocila">
+
   <h5>Moja oddana naročila</h5>
 </div>
 <?php
 //echo "<div class='stran'>";
 //echo '<div class="narocilo">';
+require_once 'includes/dbh.inc.php';
+
+$uid = $_SESSION["userid"];
+$sql = "select * from Narocilo where u_id = '$uid';";
+$result = mysqli_query($connection, $sql);
+//echo "<h6> my id: ".$uid."</h6>";
+
+while ($row = mysqli_fetch_array($result)){
+  //za lokacijo trgovine
+  $lok_id = $row["l_id"];
+  $nar_id = $row["u_id"];
+  $sqlKrajTrg = "select * from Lokacija where id='$lok_id';"; 
+  $resultLok = mysqli_query($connection, $sqlKrajTrg);
+  $rowLok = mysqli_fetch_array($resultLok);
   
-   require_once 'includes/dbh.inc.php';
-   //ideja: dva for loopa, en sprinta vsako narocilo z id-jem uporabnika,
-   //drugi znotraj, sprinta vsak element $izd = explode(",", $izdelki); kot element v <li>
-   $uid = $_SESSION["userid"];
-   $sql = "select * from Narocilo where u_id='$uid';";
-   $result = mysqli_query($connection, $sql);
-   //echo "<h6> my id: ".$uid."</h6>";
+  //za lokacijo uporabnika
+  $sqlUpor = "select naslov, kraj, postna_st from Uporabnik where id= '$nar_id';";
+  $resultUpor = mysqli_query($connection, $sqlUpor);
+  $rowUpor = mysqli_fetch_array($resultUpor);
+ echo "<div class='stran'>";
+ echo '<div class="narocilo">';
+ echo "<h5> Naročilo ID: ".$row['id']."</h5>";
+ echo "<h6> Trgovina: ".$row['trgovina']."</h6>";
+ echo "<h6> Iz kraja: ".$rowLok['mesto']." , ".$rowLok['postna_st']."</h6>";
+ echo "<h6> Dostava na naslov: ".$rowUpor['naslov'].", ".$rowUpor['kraj']." , ".$rowUpor['postna_st']."</h6>";
+ if($row['dost_id']==0){
+  echo "<h6 style='color:red;'> Naročilo še ni bilo sprejeto! </h6>";
+ }else{
+  echo "<h6 style='color:green;'> Naročilo je bilo sprejeto! </h6>";
+ }
+
+      $izd = explode(",", $row['seznam_produktov']);
+      echo "<h5 style='text-align:left;'>Seznam izdelkov: </h5>";
+      echo "<ul style='text-align:left;'>";
+      foreach ($izd as $izdelek){
+        echo "<li>".$izdelek."</li>";
+      }
+  
+      
+      echo "</ul>";
+      //echo "</form";
+      
+  echo "</div>";
+  echo "</div>";
+     }
    
-   while ($row = mysqli_fetch_array($result)){
-    //foreach($row as $value){ 
-    echo "<div class='stran'>";
-    echo '<div class="narocilo">';
-     echo "<h5> Naročilo ID: ".$row['id']."</h5>";
-         $izd = explode(",", $row['seznam_produktov']);
-         echo "<ul style='text-align:left;'>";
-         foreach ($izd as $izdelek){
-           echo "<li>".$izdelek."</li>";
-         }
      
-     
-         echo "</ul>";
-     echo "</div>";
-     echo "</div>";
    //}
-  }
+  
+  
 
    //<h6> Naročilo: 65436756734</h6>
    //<h6> Naročilo še ni bilo sprejeto </h6>
@@ -77,7 +102,49 @@
    ?>
    <div class="narocila">
   <h5>Moja sprejeta naročila</h5>
-</div>
+  </div>
+  <?php
+     require_once 'includes/dbh.inc.php';
+
+     $uid = $_SESSION["userid"];
+     $sql = "select * from Narocilo where dost_id = '$uid';";
+     $result = mysqli_query($connection, $sql);
+     //echo "<h6> my id: ".$uid."</h6>";
+     
+     while ($row = mysqli_fetch_array($result)){
+       //za lokacijo trgovine
+       $lok_id = $row["l_id"];
+       $nar_id = $row["u_id"];
+       $sqlKrajTrg = "select * from Lokacija where id='$lok_id';"; 
+       $resultLok = mysqli_query($connection, $sqlKrajTrg);
+       $rowLok = mysqli_fetch_array($resultLok);
+       
+       //za lokacijo uporabnika
+       $sqlUpor = "select naslov, kraj, postna_st from Uporabnik where id= '$nar_id';";
+       $resultUpor = mysqli_query($connection, $sqlUpor);
+       $rowUpor = mysqli_fetch_array($resultUpor);
+      echo "<div class='stran'>";
+      echo '<div class="narocilo">';
+      echo "<h5> Naročilo ID: ".$row['id']."</h5>";
+      echo "<h6> Trgovina: ".$row['trgovina']."</h6>";
+      echo "<h6> Iz kraja: ".$rowLok['mesto']." , ".$rowLok['postna_st']."</h6>";
+      echo "<h6> Dostava na naslov: ".$rowUpor['naslov'].", ".$rowUpor['kraj']." , ".$rowUpor['postna_st']."</h6>";
+           $izd = explode(",", $row['seznam_produktov']);
+           echo "<h5 style='text-align:left;'>Seznam izdelkov: </h5>";
+           echo "<ul style='text-align:left;'>";
+           foreach ($izd as $izdelek){
+             echo "<li>".$izdelek."</li>";
+           }
+       
+           
+           echo "</ul>";
+           //echo "</form";
+           
+       echo "</div>";
+       echo "</div>";
+          }
+   
+   ?>
 
   </body>
 </html>
