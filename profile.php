@@ -1,5 +1,17 @@
 <?php
  include_once 'header.php';
+ require_once 'includes/dbh.inc.php';
+ require_once 'includes/functions.inc.php';
+
+ if(isset($_GET["varname"])){
+   $idnarocila = $_GET["varname"];
+   $userid = $_SESSION["userid"];
+   echo "<h3> id nar: ".$idnarocila."</h3>";
+   echo "<h3> id moj: ".$userid."</h3>";
+   header("location: profile.php");
+   sprejmiNarocilo($connection, $idnarocila, $userid);
+
+ }
  ?>
 <br>
 <div class="stran">
@@ -63,6 +75,9 @@
 //echo "</div>";
 //echo "</div>";
    ?>
+   <div class="narocila">
+  <h5>Moja sprejeta naročila</h5>
+</div>
 
   </body>
 </html>

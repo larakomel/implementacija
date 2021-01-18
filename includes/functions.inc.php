@@ -146,16 +146,22 @@ function idLokacije($connection, $trgposta, $trgcity){
    $sql = "select * from Lokacija WHERE mesto = '$trgcity' AND postna_st='$trgposta';";
    $result = mysqli_query($connection, $sql);
 
-        if($result && mysqli_num_rows($result)>0){
+        if(mysqli_num_rows($result)>0){
+            
             $l_idsql = "select id from Lokacija where mesto = '$trgcity' AND postna_st='$trgposta';";
             $l_id = mysqli_query($connection, $l_idsql);
-            return $l_id;
+            $row = mysqli_fetch_array($l_id);
+            return $row['id'];
         }else{
            $sql2 = "insert into Lokacija (mesto, postna_st) values ('$trgcity', '$trgposta');";
            $l_id2 = mysqli_query($connection, $sql2);
+           
            if ($l_id2) {
-            //echo "New location created successfully";
-            return $l_id2;
+            $l_idsql = "select id from Lokacija where mesto = '$trgcity' AND postna_st='$trgposta';";
+            $l_id = mysqli_query($connection, $l_idsql);
+            $row = mysqli_fetch_array($l_id);
+            return $row['id'];
+            
            } else {
              echo "Error: " . $sql2 . "" . mysqli_error($connection);
              }
@@ -172,7 +178,7 @@ function createOrder($connection, $trgovina, $izdelki, $trgposta, $trgcity){
    //$u_id = $_SESSION["userid"];
    
 
-             $sql = "insert into Narocilo (seznam_produktov, trgovina, u_id, l_id) values (?,?,?,?);";
+             $sql = "insert into Narocilo (seznam_produktov, trgovina, u_id, l_id, dost_id) values (?,?,?,?,'0');";
              $stmt = mysqli_stmt_init($connection);
               if(!mysqli_stmt_prepare($stmt, $sql)){
                  header("location: ../novonarocilo.php?error=stmtfailed");
@@ -187,5 +193,17 @@ function createOrder($connection, $trgovina, $izdelki, $trgposta, $trgcity){
               header("location: ../novonarocilo.php?error=none");
              exit();
    
+}
+
+//dost_id pri narocilo mora nastavit na userid
+function sprejmiNarocilo($connection, $idnarocila, $userid){
+   $sql = "update Narocilo set dost_id = '$userid' where id = '$idnarocila';";
+   $l_id = mysqli_query($connection, $sql);
+   if ($l_id) {
+      header("location: ../profile.php");
+      
+     } else {
+       echo "Error: " . $sql . "" . mysqli_error($connection);
+       }
 }
  

@@ -24,7 +24,7 @@
    require_once 'includes/dbh.inc.php';
 
    $uid = $_SESSION["userid"];
-   $sql = "select * from Narocilo;";
+   $sql = "select * from Narocilo where dost_id = '0';";
    $result = mysqli_query($connection, $sql);
    //echo "<h6> my id: ".$uid."</h6>";
    
@@ -52,8 +52,17 @@
            echo "<li>".$izdelek."</li>";
          }
      
-     
+         
          echo "</ul>";
+         $idd = $row['id'];
+         //$_SESSION['idk']=$idd2;
+         //$idd = 'id'.$row['id'];
+         
+         echo "<form method = 'get' action='includes/sprejmi.inc.php'>";
+         //echo "<input type='hidden' name='$idd' value='$idd2'>";
+         echo "<label for='neki'>Sprejmi naročilo: </label><br>";
+         echo "<input type ='submit' name='neki' value = '$idd'>";
+         //echo "</form";
          
      echo "</div>";
      echo "</div>";
