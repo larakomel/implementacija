@@ -4,7 +4,8 @@
  require_once 'functions.inc.php';
 
 //$neki = $_SESSION['idk'];
-$idnarocila = $_GET["neki"];
+$idnarocila = $_GET["preklic"];
 $userid = $_SESSION["userid"];
 
-sprejmiNarocilo($connection, $idnarocila, $userid);
+zakljucenoNarocilo($connection, $idnarocila);
+prekliciNarocilo($connection, $idnarocila, $userid);

@@ -263,3 +263,37 @@ function changeTel($connection, $pnum, $userid){
        echo "Error: " . $sql . "" . mysqli_error($connection);
        }
 }
+
+function zakljucenoNarocilo($connection, $idnarocila){
+   $l_idsql = "select * from Narocilo where id='$idnarocila';";
+   $st = mysqli_query($connection, $l_idsql);
+   $row = mysqli_fetch_array($st);
+   if (!$st) {
+      echo "Error: " . $L_idsql . "" . mysqli_error($connection);
+     } 
+   $seznam_produktov = $row["seznam_produktov"];
+   $trgovina = $row["trgovina"];
+   $u_id = $row["u_id"];
+   $l_id = $row["l_id"];
+   $dost_id = $row["dost_id"];
+
+   $sql = "insert into stara_narocila (id, seznam_produktov, trgovina, u_id, l_id, dost_id) values (?,?,?,?,?,?);";
+   $stmt = mysqli_stmt_init($connection);
+              if(!mysqli_stmt_prepare($stmt, $sql)){
+                 header("location: ../profile.php?error=stmtfailed");
+                 exit();
+              }
+              
+              mysqli_stmt_bind_param($stmt, "issiii", $idnarocila, $seznam_produktov, $trgovina, $u_id, $l_id, $dost_id );
+              mysqli_stmt_execute($stmt);
+          
+              mysqli_stmt_close($stmt);
+              //echo "Naročilo uspešno oddano";
+              //header("location: ../profile.php?error=none");
+             //exit();
+
+   //if (!$stmt) {
+     // echo "Error: " . $sql . "" . mysqli_error($connection);
+     //}
+  // exit();
+}
