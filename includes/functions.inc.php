@@ -207,3 +207,14 @@ function sprejmiNarocilo($connection, $idnarocila, $userid){
        }
 }
  
+
+function prekliciNarocilo($connection, $idnarocila, $userid){
+   $sql = "delete from Narocilo where id = '$idnarocila';";
+   $l_id = mysqli_query($connection, $sql);
+   if ($l_id) {
+      header("location: ../profile.php");
+      
+     } else {
+       echo "Error: " . $sql . "" . mysqli_error($connection);
+       }
+}

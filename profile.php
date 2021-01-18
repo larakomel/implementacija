@@ -78,6 +78,13 @@ while ($row = mysqli_fetch_array($result)){
   
       
       echo "</ul>";
+      $idd = $row['id'];
+      if($row['dost_id']==0){
+        echo "<form method = 'get' action='includes/preklic.inc.php'>";
+         //echo "<input type='hidden' name='$idd' value='$idd2'>";
+         echo "<label for='neki'>Prekliči to naročilo: </label><br>";
+         echo "<input type ='submit' name='preklic' value = '$idd'>";
+       }
       //echo "</form";
       
   echo "</div>";
@@ -120,12 +127,13 @@ while ($row = mysqli_fetch_array($result)){
        $rowLok = mysqli_fetch_array($resultLok);
        
        //za lokacijo uporabnika
-       $sqlUpor = "select naslov, kraj, postna_st from Uporabnik where id= '$nar_id';";
+       $sqlUpor = "select telefonska_stevilka, naslov, kraj, postna_st from Uporabnik where id= '$nar_id';";
        $resultUpor = mysqli_query($connection, $sqlUpor);
        $rowUpor = mysqli_fetch_array($resultUpor);
       echo "<div class='stran'>";
       echo '<div class="narocilo">';
       echo "<h5> Naročilo ID: ".$row['id']."</h5>";
+      echo "<h6><b> Telefonska številka naročnika: ".$rowUpor['telefonska_stevilka']."</b></h6>";
       echo "<h6> Trgovina: ".$row['trgovina']."</h6>";
       echo "<h6> Iz kraja: ".$rowLok['mesto']." , ".$rowLok['postna_st']."</h6>";
       echo "<h6> Dostava na naslov: ".$rowUpor['naslov'].", ".$rowUpor['kraj']." , ".$rowUpor['postna_st']."</h6>";
